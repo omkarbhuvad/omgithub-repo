@@ -21,7 +21,7 @@ steps:
     templateLocation: 'Linked artifact'
     csmFile: 'CreateWebApp/azuredeploy.json'
     overrideParameters: |
-      -projectName omdevopsproj -linkedTemplateUri 
+      -projectName omdevops -linkedTemplateUri 
       https://raw.githubusercontent.com/omkarbhuvad/omgithub-repo/master/CreateWebApp/linkedStorageAccount.json
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
