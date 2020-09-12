@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'omdevopsproj-conn'
+    subscriptionId: '864df1db-d224-407c-b3b6-5a2cacc127b2'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'omtestrg'
+    location: 'Central India'
+    templateLocation: 'Linked artifact'
+    csmFile: 'CreateWebApp/azuredeploy.json'
+    overrideParameters: |
+      -projectName omdevopsproj -linkedTemplateUri 
+      https://raw.githubusercontent.com/omkarbhuvad/omgithub-repo/master/CreateWebApp/linkedStorageAccount.json
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
